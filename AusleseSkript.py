@@ -124,6 +124,7 @@ while 1:
         print("Daten ok")
     else:
         print("wrong M-Bus Start, restarting")
+        sys.stdout.flush()
         sleep(2.5)
         ser.flushOutput()
         ser.close()
@@ -165,6 +166,7 @@ while 1:
     except BaseException as err:
         #print("APU: ", format(apdu))
         print("Fehler: ", format(err))
+        sys.stdout.flush()
         continue;
 
     try:
@@ -202,6 +204,7 @@ while 1:
 
     except BaseException as err:
         print("Fehler: ", format(err))
+        sys.stdout.flush()
         continue;    
     
 
@@ -214,6 +217,7 @@ while 1:
                 connected = True
             except:
                 print("Lost Connection to MQTT...Trying to reconnect in 2 Seconds")
+                sys.stdout.flush()
                 time.sleep(2)
                 
 
@@ -233,6 +237,7 @@ while 1:
         print("1.0.2.8.0.255\tWirkenergie Lieferung [kWh]:\t "+str(WirkenergieN))
         print("-------------\tLeistungsfaktor:\t\t "+str(Leistungsfaktor))
         print("-------------\tWirkleistunggesamt [w]:\t\t " + str(MomentanleistungP-MomentanleistungN))
+        sys.stdout.flush()
         
     #MQTT
     if useMQTT:
@@ -300,5 +305,9 @@ while 1:
         print("Es ist ein Fehler aufgetreten.")
         print()
         print("Fehler: ", format(err))
+        sys.stdout.flush()
         sys.exit()
+
+# After everything flush stdout
+    sys.stdout.flush()
 
