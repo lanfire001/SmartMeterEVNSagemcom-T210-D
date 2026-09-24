@@ -130,7 +130,6 @@ while 1:
         ser.close()
         ser.open()
         continue
-
     if frameLen < 200:
         print("Framelength too short! " + str(frameLen))
         print("Restarting serial port....")
